@@ -1,4 +1,4 @@
-# this script plots teh density distribution of a time series
+# this script plots the density distribution of a time series
 # using the KDE method
 # Nicolas Matin 19/09/16
 
