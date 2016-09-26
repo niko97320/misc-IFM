@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # This script post processes the output of the gwham program written by Mahmoud Moradi
 # Copyright Nicolas Martin
 # 18/09/16
