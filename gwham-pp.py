@@ -84,7 +84,7 @@ merged = np.vstack((XCum, Wx))
 merged = np.transpose(merged)
 
 # nbin must be defined by user
-x, binEdge = np.histogram(merged[:,0], weights=merged[:,1], bins=50)
+x, binEdge = np.histogram(merged[:,0], weights=merged[:,1], bins='auto')
 centers = (binEdge[:-1] + binEdge[1:]) / 2
 merged1 = np.vstack((centers,-Kb*T*np.log(x)))
 merged1 = np.transpose(merged1)
