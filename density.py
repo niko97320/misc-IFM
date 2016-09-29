@@ -1,5 +1,8 @@
+#!/usr/bin/env python2.7
 # this script plots the density distribution of a time series
 # using the KDE method
+# usage : ./script file col
+# column number are 0 based
 # Nicolas Matin 19/09/16
 
 from matplotlib import pyplot as plt
