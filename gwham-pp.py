@@ -84,9 +84,13 @@ merged = np.vstack((XCum, Wx))
 merged = np.transpose(merged)
 
 # nbin must be defined by user
-x, binEdge = np.histogram(merged[:,0], weights=merged[:,1], bins='auto')
+x, binEdge = np.histogram(merged[:,0], weights=merged[:,1], bins=50)
 centers = (binEdge[:-1] + binEdge[1:]) / 2
 merged1 = np.vstack((centers,-Kb*T*np.log(x)))
 merged1 = np.transpose(merged1)
-np.savetxt(output, merged1, delimiter='\t')   
+# shifting the pmf so the minimum value is at 0
+shifted = merged1 
+shifted[:,1] -=  np.min(shifted[:,1])
+# writing output
+np.savetxt(output, shifted, delimiter='\t')   
 
