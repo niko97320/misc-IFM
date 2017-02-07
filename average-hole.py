@@ -7,11 +7,11 @@
 ### COMPUTE ###
 ###############
 
-inp = "IS-IVM-prof.dat"
-out = "IS-IVM-prof_avg.dat"
+inp = "3rif-IVM-prof.dat"
+out = "hole-prof_avg.dat"
+
 
 import numpy.ma as ma
-import matplotlib.cm as cm
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
@@ -79,30 +79,22 @@ else :
       std=np.std(data[:,start+i*binwidth:start+(i+1)*binwidth], axis = 1)
       m = np.c_[m,avg,std]
 
-#    np.savetxt(out,m, fmt="%3.3f", delimiter='\t')
+    np.savetxt(out,m, fmt="%3.3f", delimiter='\t')
 
 ############
 ### PLOT ###
 ############
 
 ## set figure sixe
-plt.rcParams["figure.figsize"] = (16,12)
+plt.figure(figsize=(6,4))
 
 #set parameters
-frameWidth = 1.5
-plt.rcParams["axes.linewidth"] = frameWidth
-plt.rcParams["axes.linewidth"] = frameWidth
-plt.rcParams["xtick.major.width"] = frameWidth
-plt.rcParams["ytick.major.width"] = frameWidth
-plt.rcParams['xtick.major.pad'] = 20
-plt.rcParams['ytick.major.pad'] = 20
-plt.xticks(fontsize=25,weight='bold')
-plt.yticks(fontsize=25,weight='bold')
-plt.xlabel('Z axis [$\AA$]',fontsize=30,weight='bold')
-plt.ylabel('Pore radius[$\AA$]',fontsize=30,weight='bold')
+plt.ylim(0,10)
+plt.xlabel('Z axis [$\AA$]')
+plt.ylabel('Pore radius[$\AA$]')
 
 #create the color panel 
-color=iter(cm.rainbow(np.linspace(0,1,nbin)))
+color=iter(plt.cm.rainbow(np.linspace(0,1,nbin)))
 
 for i in range(0,nbin) :
   #update color for the plot
@@ -110,9 +102,38 @@ for i in range(0,nbin) :
   #label=str(print'{0}ns-{1}ns'.format(int(i*binwidth/100),int((i+1)*binwidth/100)))
   label=str("%ins-%ins" % (int(i*binwidth/100),int((i+1)*binwidth/100)))
   # plot the pore profile
-  plt.plot(m[:,0], m[:,2*i+1],c=c, label=label)
+  plt.plot(m[:,0], m[:,2*i+1],c=c, label=label, lw=0.7)
 
-plt.legend(fontsize=20)
-plt.savefig("./IS-IVM-prof.png",bbox_inches='tight')
-plt.show()
+plt.legend(fontsize=6)
+plt.grid()
+plt.savefig("./3rif-IVM-prof.png",bbox_inches='tight', dpi=300)
+plt.close()
+
+###################
+### PLOT ZOOMED ###
+###################
+
+## set figure sixe
+plt.figure(figsize=(6,4))
+
+plt.ylim(0,6)
+plt.xlim(-20,20)
+plt.xlabel('Z axis [$\AA$]')
+plt.ylabel('Pore radius[$\AA$]')
+
+#create the color panel 
+color=iter(plt.cm.rainbow(np.linspace(0,1,nbin)))
+
+for i in range(0,nbin) :
+  #update color for the plot
+  c=next(color)
+  #label=str(print'{0}ns-{1}ns'.format(int(i*binwidth/100),int((i+1)*binwidth/100)))
+  label=str("%ins-%ins" % (int(i*binwidth/100),int((i+1)*binwidth/100)))
+  # plot the pore profile
+  plt.plot(m[:,0], m[:,2*i+1],c=c, label=label, lw=0.7)
+
+plt.legend(fontsize=6)
+plt.grid()
+plt.savefig("./3rif-IVM-prof_ZOOMED.png",bbox_inches='tight', dpi=300)
+
 
