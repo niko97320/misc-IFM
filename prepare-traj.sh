@@ -1,3 +1,31 @@
+
+Skip to content
+This repository
+
+    Pull requests
+    Issues
+    Gist
+
+    @niko97320
+
+2
+1
+
+    0
+
+niko97320/misc-IFM
+Code
+Issues 0
+Pull requests 0
+Projects 0
+Wiki
+Pulse
+Graphs
+Settings
+misc-IFM/prepare-traj.sh
+ec75ee7 9 minutes ago
+@niko97320 niko97320 protein
+70 lines (51 sloc) 1.86 KB
 #!/bin/bash
 
 struct="all.psf"
@@ -67,3 +95,8 @@ set sel [atomselect top "segname A B C D E AAA BBB CCC DDD EEE"]
 EOF
 
 rm tmp.txt
+
+    Contact GitHub API Training Shop Blog About 
+
+    © 2017 GitHub, Inc. Terms Privacy Security Status Help 
+
