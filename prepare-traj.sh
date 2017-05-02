@@ -47,7 +47,7 @@ for file in $(ls wrap*.dcd) ; do
     echo "info: aligned_$file already exists. Taken as is."
   else
     echo "info: aligning traj ${file}." 
-    wordom -ia rmsd --SELE "/*/@(218-235|242-265|274-299)/CA" -imol all.pdb -itrj $file --TRJOUT aligned_${file}
+    wordom -ia rmsd --SELE "/*/@(218-235|242-265|274-299)/CA" -imol $coor -itrj $file --TRJOUT aligned_${file}
   fi
 
 done 
@@ -56,7 +56,7 @@ done
 
 ls aligned_wrap*.dcd > tmp.txt
 echo "info: creating merged trajectory of the protein + IVM"
-wordom -F all -imol all.pdb -itrj tmp.txt -sele "//@(A|B|C|D|E|AAA|BBB|CCC|DDD|EEE)//" -otrj protein_full.dcd
+wordom -F all -imol $coor -itrj tmp.txt -sele "//@(A|B|C|D|E|AAA|BBB|CCC|DDD|EEE)//" -otrj protein_full.dcd
 
 echo "info: creating protein PDB and PSF" 
 vmd -dispdev text << EOF
